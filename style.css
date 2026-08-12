@@ -199,8 +199,23 @@ p { color: var(--text-muted); font-size: 1.1rem; }
     padding: 1.5rem 0;
     margin-bottom: 2rem;
 }
-.logo { display: flex; align-items: center; gap: 0.5rem; font-weight: 600; font-size: 1.2rem; }
-.logo-img { height: 40px; width: auto; object-fit: contain; display: block; }
+.logo {
+    display: inline-flex;
+    align-items: center;
+    text-decoration: none;
+    cursor: pointer;
+    transition: transform 0.25s ease, opacity 0.25s ease;
+}
+.logo:hover {
+    opacity: 0.9;
+    transform: scale(1.03);
+}
+.logo-img {
+    height: 55px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+}
 .nav-links { display: flex; gap: 2rem; list-style: none; }
 .nav-links a { color: var(--text-muted); text-decoration: none; font-size: 0.9rem; transition: color 0.3s; }
 .nav-links a:hover, .nav-links a.active { color: var(--text-main); }
