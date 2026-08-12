@@ -1,0 +1,9 @@
+{
+  "name": "site-encosta",
+  "version": "1.0.0",
+  "description": "ENCOSTA - Tecnologia que aproxima",
+  "private": true,
+  "scripts": {
+    "build": "echo 'Static site ready'"
+  }
+}
