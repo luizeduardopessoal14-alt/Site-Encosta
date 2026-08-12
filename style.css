@@ -200,6 +200,7 @@ p { color: var(--text-muted); font-size: 1.1rem; }
     margin-bottom: 2rem;
 }
 .logo { display: flex; align-items: center; gap: 0.5rem; font-weight: 600; font-size: 1.2rem; }
+.logo-img { height: 40px; width: auto; object-fit: contain; display: block; }
 .nav-links { display: flex; gap: 2rem; list-style: none; }
 .nav-links a { color: var(--text-muted); text-decoration: none; font-size: 0.9rem; transition: color 0.3s; }
 .nav-links a:hover, .nav-links a.active { color: var(--text-main); }
