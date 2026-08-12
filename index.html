@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ENCOSTA - Tecnologia que aproxima</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Fundo de vídeo animado pelo Canvas -->
+    <div class="video-container">
+        <canvas id="video-canvas"></canvas>
+    </div>
+    
+    <!-- Conteúdo em scroll por cima do Canvas -->
+    <div class="content-wrapper">
+        
+        <!-- 1. Menu -->
+        <nav class="navbar">
+            <div class="logo">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 2L2 12l10 10 10-10L12 2z" stroke="#ccff00" stroke-width="2"/>
+                    <circle cx="12" cy="12" r="4" fill="#ccff00"/>
+                </svg>
+                ENCOSTA
+            </div>
+            <ul class="nav-links">
+                <li><a href="#" class="active">Início</a></li>
+                <li><a href="#">Soluções</a></li>
+                <li><a href="#">Por que nós</a></li>
+                <li><a href="#">Contato</a></li>
+            </ul>
+            <a href="#" class="btn btn-outline">Quero começar <span>&rarr;</span></a>
+        </nav>
+
+        <!-- 2. Hero -->
+        <section class="hero">
+            <div class="badge">
+                <span class="icon">🚀</span> Tecnologia que aproxima
+            </div>
+            <h1>Um toque. <span class="highlight">Novas conexões.</span> Experiências que ficam.</h1>
+            <p>Soluções NFC para conectar pessoas a cardápios, treinos, contatos e ações digitais em segundos.</p>
+            <div class="hero-buttons">
+                <a href="#" class="btn btn-primary">Conheça as soluções</a>
+                <a href="#" class="btn btn-secondary">Fale com a gente</a>
+            </div>
+        </section>
+
+        <!-- 3. Painel visual do hero (Dashboard Cards) -->
+        <section class="dashboard">
+            <div class="card card-small">
+                <div class="card-header">
+                    <div class="icon-box">👁️</div>
+                </div>
+                <h3>Tudo conectado em<br>um só lugar.</h3>
+                <p class="card-footer">Gerencie destinos, conteúdos e experiências com facilidade.</p>
+            </div>
+            
+            <div class="card card-small">
+                <div class="card-header">
+                    <div class="icon-box">📊</div>
+                </div>
+                <h3>Dados para entender<br>cada toque.</h3>
+                <p class="card-footer">Acompanhe acessos e descubra o que mais chama atenção.</p>
+            </div>
+
+            <div class="card card-large">
+                <div class="card-header space-between">
+                    <h3>Interações</h3>
+                    <div class="tabs">
+                        <span>Hoje</span><span>Semana</span><span>Mês</span>
+                    </div>
+                </div>
+                <div class="chart-mockup">
+                    <svg viewBox="0 0 400 150" class="line-chart">
+                        <path d="M0 120 L40 110 L80 130 L120 90 L160 100 L200 40 L240 70 L280 60 L320 100 L360 50 L400 80 L400 150 L0 150 Z" fill="rgba(204, 255, 0, 0.2)"/>
+                        <path d="M0 120 L40 110 L80 130 L120 90 L160 100 L200 40 L240 70 L280 60 L320 100 L360 50 L400 80" fill="none" stroke="#ccff00" stroke-width="3"/>
+                    </svg>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. Bloco de controle e soluções (Features) -->
+        <section class="features">
+            <div class="features-left">
+                <h2><span class="highlight">Mais agilidade</span> em cada toque — <span class="highlight">conecte</span>, simplifique e surpreenda</h2>
+                <p>Transformamos ações comuns em experiências rápidas e intuitivas, sem aplicativos e sem complicação para quem usa.</p>
+                <a href="#" class="btn btn-primary">Ver possibilidades</a>
+            </div>
+            <div class="features-right">
+                <div class="tags">
+                    <span class="tag active">Encosta Food</span>
+                    <span class="tag">Encosta Training</span>
+                    <span class="tag">Encosta Connect</span>
+                    <span class="tag">Encosta Review</span>
+                    <span class="tag">Encosta Wi-Fi</span>
+                    <span class="tag">Encosta Imob</span>
+                    <span class="tag">Encosta Drive</span>
+                    <span class="tag">Encosta Focus</span>
+                    <span class="tag">Encosta Sleep</span>
+                </div>
+                <div class="search-bar">
+                    <input type="text" value="Tecnologia NFC" readonly>
+                    <span class="search-desc">Aproxime o celular. O conteúdo certo aparece em segundos.</span>
+                </div>
+                <div class="feature-cards">
+                    <div class="f-card">
+                        <div class="f-icon warning">⚡</div>
+                        <h4>CONEXÕES</h4>
+                        <p>Mais acessos, menos etapas.</p>
+                        <a href="#" class="f-link">Saiba mais</a>
+                    </div>
+                    <div class="f-card">
+                        <div class="f-icon success">🌟</div>
+                        <h4>EXPERIÊNCIA</h4>
+                        <p>Simples para quem usa.</p>
+                        <a href="#" class="f-link">Saiba mais</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. Soluções em destaque (Services) -->
+        <section class="services">
+            <h2 class="text-center">Seu negócio, conectado a<br><span class="highlight">novas possibilidades</span></h2>
+            <div class="services-grid">
+                
+                <div class="s-card green-card">
+                    <h3>Encosta<br>Food</h3>
+                    <p>Cardápios digitais por aproximação, sempre atualizados e sem depender de aplicativo ou QR Code.</p>
+                    <div class="bar-chart">
+                        <div class="bar" style="height: 40%"></div>
+                        <div class="bar" style="height: 60%"></div>
+                        <div class="bar" style="height: 30%"></div>
+                        <div class="bar" style="height: 80%"></div>
+                        <div class="bar" style="height: 50%"></div>
+                        <div class="bar" style="height: 100%"></div>
+                        <div class="bar" style="height: 70%"></div>
+                    </div>
+                </div>
+
+                <div class="s-card glass-card">
+                    <h3>Encosta<br>Training</h3>
+                    <p>Treinos, vídeos e instruções direto no equipamento para orientar alunos com rapidez e autonomia.</p>
+                    <div class="line-chart-simple">
+                         <svg viewBox="0 0 200 100">
+                             <path d="M0 80 L30 60 L60 90 L90 40 L120 70 L150 20 L200 50" fill="none" stroke="#fff" stroke-width="2"/>
+                         </svg>
+                    </div>
+                </div>
+
+                <div class="s-card glass-card">
+                    <h3>Encosta<br>Connect</h3>
+                    <p>WhatsApp, Instagram, portfólio e contatos reunidos em um único ponto de conexão.</p>
+                    <div class="donut-chart">
+                        <svg viewBox="0 0 36 36" class="circular-chart">
+                            <path class="circle-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                            <path class="circle" stroke-dasharray="75, 100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                        </svg>
+                        <div class="legend">
+                            <span><i class="dot active"></i> Concluído</span>
+                            <span><i class="dot"></i> Pendente</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. Processo (Journey) -->
+        <section class="journey">
+            <div class="journey-header">
+                <h2>Comece <span class="highlight">sua jornada</span><br>com a <span class="highlight">ENCOSTA</span></h2>
+                <div class="journey-desc">
+                    <p>Começamos entendendo sua ideia e seguimos com você da personalização ao uso. Tudo de forma simples, rápida e alinhada ao seu espaço.</p>
+                    <a href="#" class="btn btn-primary">Quero começar</a>
+                </div>
+            </div>
+
+            <div class="badge-how">
+                <span class="icon">📝</span> Como funciona
+            </div>
+
+            <div class="step-list">
+                <div class="step">
+                    <div class="step-num">01</div>
+                    <div class="step-title"><h3>Descoberta</h3></div>
+                    <div class="step-desc">
+                        <p>Entendemos seu negócio, público e objetivo para indicar a solução mais útil em cada ponto de contato.</p>
+                        <a href="#" class="btn btn-outline-white">Saiba mais</a>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-num">02</div>
+                    <div class="step-title"><h3>Planejamento</h3></div>
+                    <div class="step-desc"><p>Definimos o conteúdo, os locais de uso e a experiência de cada tag.</p></div>
+                </div>
+                <div class="step">
+                    <div class="step-num">03</div>
+                    <div class="step-title"><h3>Personalização</h3></div>
+                    <div class="step-desc"><p>Criamos as peças com identidade visual, links e informações da sua marca.</p></div>
+                </div>
+                <div class="step">
+                    <div class="step-num">04</div>
+                    <div class="step-title"><h3>Ativação</h3></div>
+                    <div class="step-desc"><p>Configuramos, testamos e entregamos tudo pronto para aproximar e usar.</p></div>
+                </div>
+                <div class="step">
+                    <div class="step-num">05</div>
+                    <div class="step-title"><h3>Suporte</h3></div>
+                    <div class="step-desc"><p>Acompanhamos os acessos e ajustamos os conteúdos sempre que necessário.</p></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 7. CTA final -->
+        <section class="cta-bottom">
+            <div class="cta-card">
+                <h2>Coloque <span class="highlight">seu negócio</span> em movimento</h2>
+                <p>Transforme cardápios, equipamentos, vitrines e espaços em pontos de conexão. A experiência começa quando alguém encosta.</p>
+                <a href="#" class="btn btn-primary"><span class="icon">&rarr;</span> Solicitar uma demonstração</a>
+            </div>
+        </section>
+
+        <!-- 8. Rodapé -->
+        <footer>
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <div class="logo">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 2L2 12l10 10 10-10L12 2z" stroke="#ccff00" stroke-width="2"/>
+                            <circle cx="12" cy="12" r="4" fill="#ccff00"/>
+                        </svg>
+                        ENCOSTA
+                    </div>
+                    <p>A ENCOSTA transforma pontos físicos em conexões digitais simples, rápidas e inteligentes com tecnologia NFC.</p>
+                    <div class="socials">
+                        <a href="#">FB</a>
+                        <a href="#">IG</a>
+                        <a href="#">X</a>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <h4>Navegação</h4>
+                    <a href="#">Início</a>
+                    <a href="#">Sobre a ENCOSTA</a>
+                    <a href="#">Soluções</a>
+                    <a href="#">Como funciona</a>
+                    <a href="#">Contato</a>
+                </div>
+                <div class="footer-links">
+                    <h4>Soluções</h4>
+                    <a href="#">Encosta Food</a>
+                    <a href="#">Encosta Training</a>
+                    <a href="#">Encosta Connect</a>
+                    <a href="#">Encosta Review</a>
+                    <a href="#">Ver todas</a>
+                </div>
+                <div class="footer-contact">
+                    <h4>Fale com a gente</h4>
+                    <p>WhatsApp</p>
+                    <p>@encosta.tech</p>
+                    <p>Maceió — AL</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© ENCOSTA 2026. Todos os direitos reservados.</p>
+                <div class="bottom-links">
+                    <a href="#">Política de Privacidade</a>
+                    <a href="#">Termos de Uso</a>
+                </div>
+            </div>
+        </footer>
+
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
