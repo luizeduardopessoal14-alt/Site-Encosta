@@ -86,3 +86,67 @@ if (document.readyState === 'loading') {
     initSpecularButtons();
 }
 window.addEventListener('load', initSpecularButtons);
+
+// --- Floating Navbar & Scrollspy Logic ---
+function initFloatingNavbar() {
+    const navbar = document.getElementById('navbar');
+    const mobileToggle = document.getElementById('mobile-toggle');
+    const navLinksContainer = document.getElementById('nav-links');
+    const navLinks = document.querySelectorAll('.nav-links a');
+    const sections = document.querySelectorAll('section[id]');
+
+    // 1. Alternar classe .scrolled ao rolar
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 40) {
+            navbar.classList.add('scrolled');
+        } else {
+            navbar.classList.remove('scrolled');
+        }
+    });
+
+    // 2. Menu Hambúrguer Mobile
+    if (mobileToggle && navLinksContainer) {
+        mobileToggle.addEventListener('click', () => {
+            mobileToggle.classList.toggle('open');
+            navLinksContainer.classList.toggle('active');
+        });
+
+        // Fechar ao clicar em um link
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileToggle.classList.remove('open');
+                navLinksContainer.classList.remove('active');
+            });
+        });
+    }
+
+    // 3. ScrollSpy para destacar o link ativo
+    const observerOptions = {
+        root: null,
+        rootMargin: '-20% 0px -60% 0px',
+        threshold: 0
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const id = entry.target.getAttribute('id');
+                navLinks.forEach(link => {
+                    if (link.getAttribute('href') === `#${id}`) {
+                        link.classList.add('active');
+                    } else {
+                        link.classList.remove('active');
+                    }
+                });
+            }
+        });
+    }, observerOptions);
+
+    sections.forEach(section => observer.observe(section));
+}
+
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initFloatingNavbar);
+} else {
+    initFloatingNavbar();
+}

@@ -21,21 +21,27 @@
     <div class="content-wrapper">
         
         <!-- 1. Menu -->
-        <nav class="navbar">
-            <a href="#" class="logo" title="Voltar ao início">
+        <nav class="navbar" id="navbar">
+            <a href="#inicio" class="logo" title="Voltar ao início">
                 <img src="assets/logo.png" alt="ENCOSTA - Tecnologia que aproxima" class="logo-img">
             </a>
-            <ul class="nav-links">
-                <li><a href="#" class="active">Início</a></li>
-                <li><a href="#">Soluções</a></li>
-                <li><a href="#">Por que nós</a></li>
-                <li><a href="#">Contato</a></li>
+            <ul class="nav-links" id="nav-links">
+                <li><a href="#inicio" class="active">Início</a></li>
+                <li><a href="#solucoes">Soluções</a></li>
+                <li><a href="#por-que-nos">Por que nós</a></li>
+                <li><a href="#como-funciona">Como funciona</a></li>
+                <li><a href="#contato">Contato</a></li>
             </ul>
-            <a href="#" class="btn btn-outline">Quero começar <span>&rarr;</span></a>
+            <a href="#contato" class="btn btn-outline nav-btn">Quero começar <span>&rarr;</span></a>
+            <button class="mobile-toggle" id="mobile-toggle" aria-label="Abrir menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
         </nav>
 
         <!-- 2. Hero -->
-        <section class="hero">
+        <section class="hero" id="inicio">
             <div class="badge">
                 <span class="icon">🚀</span> Tecnologia que aproxima
             </div>
@@ -82,7 +88,7 @@
         </section>
 
         <!-- 4. Bloco de controle e soluções (Features) -->
-        <section class="features">
+        <section class="features" id="por-que-nos">
             <div class="features-left">
                 <h2><span class="highlight">Mais agilidade</span> em cada toque — <span class="highlight">conecte</span>, simplifique e surpreenda</h2>
                 <p>Transformamos ações comuns em experiências rápidas e intuitivas, sem aplicativos e sem complicação para quem usa.</p>
@@ -122,7 +128,7 @@
         </section>
 
         <!-- 5. Soluções em destaque (Services) -->
-        <section class="services">
+        <section class="services" id="solucoes">
             <h2 class="text-center">Seu negócio, conectado a<br><span class="highlight">novas possibilidades</span></h2>
             <div class="services-grid">
                 
@@ -168,7 +174,7 @@
         </section>
 
         <!-- 6. Processo (Journey) -->
-        <section class="journey">
+        <section class="journey" id="como-funciona">
             <div class="journey-header">
                 <h2>Comece <span class="highlight">sua jornada</span><br>com a <span class="highlight">ENCOSTA</span></h2>
                 <div class="journey-desc">
@@ -214,7 +220,7 @@
         </section>
 
         <!-- 7. CTA final -->
-        <section class="cta-bottom">
+        <section class="cta-bottom" id="contato">
             <div class="cta-card">
                 <h2>Coloque <span class="highlight">seu negócio</span> em movimento</h2>
                 <p>Transforme cardápios, equipamentos, vitrines e espaços em pontos de conexão. A experiência começa quando alguém encosta.</p>
