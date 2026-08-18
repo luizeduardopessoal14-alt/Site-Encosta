@@ -187,68 +187,15 @@
         </section>
 
         <!-- 6. Processo (Journey) -->
-        <section class="journey" id="como-funciona">
-            <div class="journey-header">
-                <h2>Comece <span class="highlight">sua jornada</span><br>com a <span class="highlight">ENCOSTA</span>
-                </h2>
-                <div class="journey-desc">
-                    <p>Começamos entendendo sua ideia e seguimos com você da personalização ao uso. Tudo de forma
-                        simples, rápida e alinhada ao seu espaço.</p>
-                    <a href="#" class="btn btn-primary">Quero começar</a>
+        <!-- 6. Processo (V?deo Scroll Como Funciona) -->
+        <section class="journey-video-section" id="como-funciona">
+            <div class="video-sticky-container">
+                <div class="video-header">
+                    <h2>Como funciona a <span class="highlight">ENCOSTA</span></h2>
                 </div>
-            </div>
-
-            <div class="badge-how">
-                <span class="icon">📝</span> Como funciona
-            </div>
-
-            <div class="step-list">
-                <div class="step">
-                    <div class="step-num">01</div>
-                    <div class="step-title">
-                        <h3>Descoberta</h3>
-                    </div>
-                    <div class="step-desc">
-                        <p>Entendemos seu negócio, público e objetivo para indicar a solução mais útil em cada ponto de
-                            contato.</p>
-                        <a href="#" class="btn btn-outline-white">Saiba mais</a>
-                    </div>
-                </div>
-                <div class="step">
-                    <div class="step-num">02</div>
-                    <div class="step-title">
-                        <h3>Planejamento</h3>
-                    </div>
-                    <div class="step-desc">
-                        <p>Definimos o conteúdo, os locais de uso e a experiência de cada tag.</p>
-                    </div>
-                </div>
-                <div class="step">
-                    <div class="step-num">03</div>
-                    <div class="step-title">
-                        <h3>Personalização</h3>
-                    </div>
-                    <div class="step-desc">
-                        <p>Criamos as peças com identidade visual, links e informações da sua marca.</p>
-                    </div>
-                </div>
-                <div class="step">
-                    <div class="step-num">04</div>
-                    <div class="step-title">
-                        <h3>Ativação</h3>
-                    </div>
-                    <div class="step-desc">
-                        <p>Configuramos, testamos e entregamos tudo pronto para aproximar e usar.</p>
-                    </div>
-                </div>
-                <div class="step">
-                    <div class="step-num">05</div>
-                    <div class="step-title">
-                        <h3>Suporte</h3>
-                    </div>
-                    <div class="step-desc">
-                        <p>Acompanhamos os acessos e ajustamos os conteúdos sempre que necessário.</p>
-                    </div>
+                <div class="video-viewport">
+                    <canvas id="video-canvas-display" class="encosta-scroll-canvas"></canvas>
+                    <video id="encosta-video" class="encosta-scroll-video" src="public/encosta-optimized.mp4" preload="auto" muted playsinline style="display: none;"></video>
                 </div>
             </div>
         </section>
