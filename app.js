@@ -1,64 +1,112 @@
-const canvas = document.getElementById('video-canvas');
-const context = canvas.getContext('2d');
+// --- Video Scroll Scrubbing Engine (Canvas + Video Dual Render) ---
+function initScrollVideo() {
+    const video = document.getElementById('encosta-video');
+    const section = document.getElementById('como-funciona');
+    const canvas = document.getElementById('video-canvas-display');
 
-// ATENÇÃO: Verifique quantos frames foram gerados na pasta e atualize este número!
-const frameCount = 188; 
+    if (!video || !section) return;
 
-// Formata o nome para buscar frame-001.webp, frame-002.webp, etc.
-const currentFrame = index => (
-  `public/frames/frame-${index.toString().padStart(3, '0')}.webp`
-);
+    const ctx = canvas ? canvas.getContext('2d') : null;
 
-const images = [];
+    video.muted = true;
+    video.playsInline = true;
+    video.preload = 'auto';
 
-// Tamanho base original do vídeo (ajuste se for, por exemplo, 4K ou Vertical)
-canvas.width = 1920; 
-canvas.height = 1080;
+    let targetTime = 0;
+    let isSeeking = false;
+    let pendingTime = null;
 
-// Carrega a primeira imagem imediatamente para não ter tela preta
-const firstImage = new Image();
-firstImage.src = currentFrame(1);
-firstImage.onload = () => {
-    context.drawImage(firstImage, 0, 0, canvas.width, canvas.height);
-};
-images[0] = firstImage;
-
-// Função de Preload progressivo para não travar o carregamento do site
-const preloadImages = () => {
-    for (let i = 2; i <= frameCount; i++) {
-        const img = new Image();
-        img.src = currentFrame(i);
-        images[i - 1] = img;
+    function getProgress() {
+        const rect = section.getBoundingClientRect();
+        const totalScrollable = section.offsetHeight - window.innerHeight;
+        if (totalScrollable <= 0) return 0;
+        const scrollOffset = -rect.top;
+        return Math.max(0, Math.min(1, scrollOffset / totalScrollable));
     }
-};
 
-// Iniciar o preload dos outros frames logo após o site carregar
-window.addEventListener('load', () => {
-    setTimeout(preloadImages, 500);
-});
-
-// Lógica de renderização conectada ao Scroll
-window.addEventListener('scroll', () => {  
-    const html = document.documentElement;
-    const scrollTop = html.scrollTop;
-    const maxScrollTop = html.scrollHeight - window.innerHeight;
-    const scrollFraction = scrollTop / maxScrollTop;
-    
-    // Calcula o índice atual baseado na fração rolada
-    const frameIndex = Math.min(
-        frameCount - 1,
-        Math.ceil(scrollFraction * frameCount)
-    );
-    
-    // Desenha apenas se a imagem já foi baixada
-    if (images[frameIndex] && images[frameIndex].complete) {
-        requestAnimationFrame(() => {
-            context.drawImage(images[frameIndex], 0, 0, canvas.width, canvas.height);
-        });
+    function drawFrame() {
+        if (ctx && canvas && video.videoWidth && video.videoHeight) {
+            if (canvas.width !== video.videoWidth || canvas.height !== video.videoHeight) {
+                canvas.width = video.videoWidth;
+                canvas.height = video.videoHeight;
+            }
+            ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+        }
     }
-});
 
-// --- SpecularButton (React Bits JS+CSS dynamic reflection handler) ---
+    function applySeek(time) {
+        if (!video.duration || isNaN(video.duration)) return;
+        const safeTime = Math.max(0, Math.min(video.duration - 0.03, time));
+        
+        if (Math.abs(video.currentTime - safeTime) < 0.01) {
+            drawFrame();
+            return;
+        }
+
+        if (isSeeking) {
+            pendingTime = safeTime;
+            return;
+        }
+
+        isSeeking = true;
+        try {
+            if ('fastSeek' in video) {
+                video.fastSeek(safeTime);
+            } else {
+                video.currentTime = safeTime;
+            }
+        } catch (e) {
+            video.currentTime = safeTime;
+        }
+    }
+
+    function onScroll() {
+        if (!video.duration || isNaN(video.duration)) return;
+        const progress = getProgress();
+        targetTime = progress * video.duration;
+        applySeek(targetTime);
+    }
+
+    video.addEventListener('seeking', () => {
+        isSeeking = true;
+    });
+
+    video.addEventListener('seeked', () => {
+        isSeeking = false;
+        drawFrame();
+        if (pendingTime !== null) {
+            const nextTime = pendingTime;
+            pendingTime = null;
+            applySeek(nextTime);
+        }
+    });
+
+    function setupVideo() {
+        video.pause();
+        drawFrame();
+        onScroll();
+    }
+
+    video.addEventListener('loadedmetadata', setupVideo);
+    video.addEventListener('loadeddata', setupVideo);
+    video.addEventListener('canplay', setupVideo);
+
+    if (video.readyState >= 1) {
+        setupVideo();
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll, { passive: true });
+
+    const checkInterval = setInterval(() => {
+        if (video.duration && !isNaN(video.duration)) {
+            clearInterval(checkInterval);
+            setupVideo();
+        }
+    }, 200);
+}
+
+// --- SpecularButton (Reflexos dinâmicos nos botões) ---
 function initSpecularButtons() {
     const buttons = document.querySelectorAll('.btn');
     buttons.forEach(btn => {
@@ -80,14 +128,7 @@ function initSpecularButtons() {
     });
 }
 
-if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initSpecularButtons);
-} else {
-    initSpecularButtons();
-}
-window.addEventListener('load', initSpecularButtons);
-
-// --- Floating Navbar & Scrollspy Logic ---
+// --- Floating Navbar, Mobile Menu & Scrollspy ---
 function initFloatingNavbar() {
     const navbar = document.getElementById('navbar');
     const mobileToggle = document.getElementById('mobile-toggle');
@@ -95,23 +136,20 @@ function initFloatingNavbar() {
     const navLinks = document.querySelectorAll('.nav-links a');
     const sections = document.querySelectorAll('section[id]');
 
-    // 1. Alternar classe .scrolled ao rolar
     window.addEventListener('scroll', () => {
         if (window.scrollY > 40) {
             navbar.classList.add('scrolled');
         } else {
             navbar.classList.remove('scrolled');
         }
-    });
+    }, { passive: true });
 
-    // 2. Menu Hambúrguer Mobile
     if (mobileToggle && navLinksContainer) {
         mobileToggle.addEventListener('click', () => {
             mobileToggle.classList.toggle('open');
             navLinksContainer.classList.toggle('active');
         });
 
-        // Fechar ao clicar em um link
         navLinks.forEach(link => {
             link.addEventListener('click', () => {
                 mobileToggle.classList.remove('open');
@@ -120,10 +158,22 @@ function initFloatingNavbar() {
         });
     }
 
-    // 3. ScrollSpy para destacar o link ativo
+    navLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+            const href = link.getAttribute('href');
+            if (href && href.startsWith('#')) {
+                const targetSec = document.querySelector(href);
+                if (targetSec) {
+                    e.preventDefault();
+                    targetSec.scrollIntoView({ behavior: 'smooth' });
+                }
+            }
+        });
+    });
+
     const observerOptions = {
         root: null,
-        rootMargin: '-20% 0px -60% 0px',
+        rootMargin: '-20% 0px -50% 0px',
         threshold: 0
     };
 
@@ -145,8 +195,15 @@ function initFloatingNavbar() {
     sections.forEach(section => observer.observe(section));
 }
 
-if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initFloatingNavbar);
-} else {
+function initApp() {
+    initScrollVideo();
+    initSpecularButtons();
     initFloatingNavbar();
 }
+
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initApp);
+} else {
+    initApp();
+}
+window.addEventListener('load', initApp);
