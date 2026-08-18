@@ -30,7 +30,9 @@ function initScrollVideo() {
                 canvas.width = video.videoWidth;
                 canvas.height = video.videoHeight;
             }
-            ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+            try {
+                ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+            } catch (e) {}
         }
     }
 
@@ -81,6 +83,10 @@ function initScrollVideo() {
         }
     });
 
+    video.addEventListener('timeupdate', () => {
+        drawFrame();
+    });
+
     function setupVideo() {
         video.pause();
         drawFrame();
@@ -93,6 +99,8 @@ function initScrollVideo() {
 
     if (video.readyState >= 1) {
         setupVideo();
+    } else {
+        try { video.load(); } catch (e) {}
     }
 
     window.addEventListener('scroll', onScroll, { passive: true });
@@ -106,7 +114,7 @@ function initScrollVideo() {
     }, 200);
 }
 
-// --- SpecularButton (Reflexos dinâmicos nos botões) ---
+// --- SpecularButton (Reflexos din?micos nos bot?es) ---
 function initSpecularButtons() {
     const buttons = document.querySelectorAll('.btn');
     buttons.forEach(btn => {
@@ -145,16 +153,26 @@ function initFloatingNavbar() {
     }, { passive: true });
 
     if (mobileToggle && navLinksContainer) {
-        mobileToggle.addEventListener('click', () => {
+        const handleToggle = (e) => {
+            if (e) e.stopPropagation();
             mobileToggle.classList.toggle('open');
             navLinksContainer.classList.toggle('active');
-        });
+        };
+
+        mobileToggle.addEventListener('click', handleToggle);
 
         navLinks.forEach(link => {
             link.addEventListener('click', () => {
                 mobileToggle.classList.remove('open');
                 navLinksContainer.classList.remove('active');
             });
+        });
+
+        document.addEventListener('click', (e) => {
+            if (navLinksContainer.classList.contains('active') && !navbar.contains(e.target)) {
+                mobileToggle.classList.remove('open');
+                navLinksContainer.classList.remove('active');
+            }
         });
     }
 

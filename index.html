@@ -192,7 +192,11 @@
                 </div>
                 <div class="video-viewport">
                     <canvas id="video-canvas-display" class="encosta-scroll-canvas"></canvas>
-                    <video id="encosta-video" class="encosta-scroll-video" src="public/encosta-optimized.mp4" preload="auto" muted playsinline style="display: none;"></video>
+                    <video id="encosta-video" class="encosta-scroll-video" preload="auto" muted playsinline webkit-playsinline>
+                        <source src="encosta-optimized.mp4" type="video/mp4">
+                        <source src="public/encosta-optimized.mp4" type="video/mp4">
+                        <source src="/encosta-optimized.mp4" type="video/mp4">
+                    </video>
                 </div>
             </div>
         </section>
